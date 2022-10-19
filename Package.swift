@@ -16,8 +16,7 @@ let package = Package(
             targets: ["MagicExt-OAuth"]),
         .library(
             name: "MagicExt-OIDC",
-            targets: ["MagicExt-OIDC"]
-        ),
+            targets: ["MagicExt-OIDC"]),
     ],
     dependencies: [
         .package(url: "https://github.com/magiclabs/magic-ios.git", from:"4.0.0"),
@@ -38,5 +37,8 @@ let package = Package(
         .testTarget(
             name: "MagicExt-OAuthTests",
             dependencies: ["MagicExt-OAuth"]),
+        .testTarget(
+            name: "MagicExt-OIDCTests",
+            dependencies: ["MagicExt-OIDC"]),
     ]
 )
