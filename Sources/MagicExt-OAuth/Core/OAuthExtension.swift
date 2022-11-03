@@ -13,14 +13,14 @@ import MagicSDK
 import PromiseKit
 
 public class OAuthExtension: BaseModule {
-    
+
     public enum OAuthExtensionError: Swift.Error {
         case parseSuccessURLError(url: String)
         case unsupportedVersions
         case userDeniedAccess(Swift.Error)
         case unableToStartPopup
     }
-    
+
     public func loginWithPopup (_ configuration: OAuthConfiguration) -> Promise<OAuthResponse> {
         return Promise { resolver in
             loginWithPopup(configuration, response: promiseResolver(resolver))
@@ -29,7 +29,7 @@ public class OAuthExtension: BaseModule {
 
     public func loginWithPopup (_ configuration: OAuthConfiguration, response: @escaping Web3ResponseCompletion<OAuthResponse>) {
         let oauthChallenge = OAuthChallenge()
-        
+
         // Construct OAuth URL
         var components = URLComponents()
         components.scheme = "https"
@@ -38,39 +38,40 @@ public class OAuthExtension: BaseModule {
 //        components.host = "192.168.0.106"
 //        components.port = 3014
         components.path = "/v1/oauth2/\(configuration.provider.rawValue.lowercased())/start"
-        
+
         components.queryItems = [
             URLQueryItem(name: "magic_api_key", value: self.provider.urlBuilder.apiKey),
             URLQueryItem(name: "magic_challenge", value: oauthChallenge.challenge),
             URLQueryItem(name: "state", value: oauthChallenge.state),
             URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
-            URLQueryItem(name: "platform", value: "rn")
+            URLQueryItem(name: "platform", value: "rn"),
+            URLQueryItem(name: "bundleId", value: Bundle.main.bundleIdentifier)
         ]
-        
+
         if let scope = configuration.scope {
             if scope.count > 0 {
                 components.queryItems?.append(URLQueryItem(name: "scope", value: scope.joined(separator: " ")))
             }
         }
-        
+
         if let loginHint = configuration.loginHint {
             components.queryItems?.append(URLQueryItem(name: "login_hint", value: loginHint))
         }
-        
-        let authURL = components.url
-    
 
-        
+        let authURL = components.url
+
+
+
         firstly {
             // Pop Authentication Session
             createAuthenticationSession(authURL: authURL, configuration: configuration)
         }.done {successURL -> Void in
-            
+
             // Remove Percentage Encode to prevent double encoding
             guard let query = URL(string:successURL)?.query?.removingPercentEncoding else {
                 throw OAuthExtensionError.parseSuccessURLError(url: successURL)
             }
-        
+
             // send credential to auth relayer to authenticate
             let request = RPCRequest<[String]>(method: OAuthMethod.magic_oauth_parse_redirect_result.rawValue, params: [           "?\(query)", oauthChallenge.verifier, oauthChallenge.state])
             self.provider.send(request: request, response: response)
@@ -82,12 +83,12 @@ public class OAuthExtension: BaseModule {
     }
 
     private func createAuthenticationSession(authURL: URL?, configuration: OAuthConfiguration) -> Promise<String> {
-        
+
         // Remove "://" from app schemes to prevent error
         let callbackURLScheme = configuration.redirectURI.replacingOccurrences(of: "://", with: "", options: NSString.CompareOptions.literal, range: nil)
-        
+
         return Promise { resolver in
-            
+
             // find topmost view controller from the hierarchy and attach modal Controller to it
             guard let keyWindow = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else {
                 return resolver.reject(OAuthExtensionError.unableToStartPopup)
@@ -115,7 +116,7 @@ public class OAuthExtension: BaseModule {
             } else {
                 return resolver.reject(OAuthExtensionError.unableToStartPopup)
             }
-                
+
         }
     }
 }
