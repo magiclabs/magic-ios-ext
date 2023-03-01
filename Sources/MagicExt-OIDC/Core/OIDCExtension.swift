@@ -8,7 +8,6 @@
 import Foundation
 import MagicSDK_Web3
 import MagicSDK
-import os
 
 public class OIDCExtension: BaseModule {
 
@@ -19,21 +18,9 @@ public class OIDCExtension: BaseModule {
 }
 
 extension Magic {
-    @available(iOS 14.0, *)
-    private static let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
-        category: String(describing: Magic.self)
-    )
-    
-    private static let MA_EXTENSION_ONLY_MSG = "This extension only works with Magic Auth API Keys"
     
     public var openid: OIDCExtension {
-        if #available(iOS 14.0, *) {
-            Magic.logger.warning("\(Magic.MA_EXTENSION_ONLY_MSG)")
-        } else {
-            print("\(Magic.MA_EXTENSION_ONLY_MSG)")
-        }
-        
+        print("\(self.MA_EXTENSION_ONLY_MSG)")
         return OIDCExtension(rpcProvider: self.rpcProvider)
     }
 }

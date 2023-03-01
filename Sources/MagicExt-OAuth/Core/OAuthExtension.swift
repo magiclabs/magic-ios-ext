@@ -11,7 +11,6 @@ import SafariServices
 import MagicSDK_Web3
 import MagicSDK
 import PromiseKit
-import os
 
 public class OAuthExtension: BaseModule {
 
@@ -35,9 +34,6 @@ public class OAuthExtension: BaseModule {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "auth.magic.link"
-//        components.scheme = "http"
-//        components.host = "192.168.0.106"
-//        components.port = 3014
         components.path = "/v1/oauth2/\(configuration.provider.rawValue.lowercased())/start"
 
         components.queryItems = [
@@ -79,7 +75,6 @@ public class OAuthExtension: BaseModule {
         }.catch { error in
             let errResponse = Web3Response<OAuthResponse>(error: OAuthExtensionError.userDeniedAccess(error))
             response(errResponse)
-//            handleRollbarError(error, log: false)
         }
     }
 
@@ -123,21 +118,9 @@ public class OAuthExtension: BaseModule {
 }
 
 extension Magic {
-    @available(iOS 14.0, *)
-    private static let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
-        category: String(describing: Magic.self)
-    )
-    
-    private static let MA_EXTENSION_ONLY_MSG = "This extension only works with Magic Auth API Keys"
     
     public var oauth: OAuthExtension {
-        if #available(iOS 14.0, *) {
-            Magic.logger.warning("\(Magic.MA_EXTENSION_ONLY_MSG)")
-        } else {
-            print(Magic.MA_EXTENSION_ONLY_MSG)
-        }
-        
+        print(self.MA_EXTENSION_ONLY_MSG)
         return OAuthExtension(rpcProvider: self.rpcProvider)
     }
 }
