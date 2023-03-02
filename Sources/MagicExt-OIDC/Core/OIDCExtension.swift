@@ -18,7 +18,9 @@ public class OIDCExtension: BaseModule {
 }
 
 extension Magic {
+    
     public var openid: OIDCExtension {
+        print("\(self.MA_EXTENSION_ONLY_MSG)")
         return OIDCExtension(rpcProvider: self.rpcProvider)
     }
 }

@@ -34,9 +34,6 @@ public class OAuthExtension: BaseModule {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "auth.magic.link"
-//        components.scheme = "http"
-//        components.host = "192.168.0.106"
-//        components.port = 3014
         components.path = "/v1/oauth2/\(configuration.provider.rawValue.lowercased())/start"
 
         components.queryItems = [
@@ -78,7 +75,6 @@ public class OAuthExtension: BaseModule {
         }.catch { error in
             let errResponse = Web3Response<OAuthResponse>(error: OAuthExtensionError.userDeniedAccess(error))
             response(errResponse)
-//            handleRollbarError(error, log: false)
         }
     }
 
@@ -122,7 +118,9 @@ public class OAuthExtension: BaseModule {
 }
 
 extension Magic {
+    
     public var oauth: OAuthExtension {
+        print(self.MA_EXTENSION_ONLY_MSG)
         return OAuthExtension(rpcProvider: self.rpcProvider)
     }
 }
