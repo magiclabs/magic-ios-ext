@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "MagicExtensions",
     platforms: [
-        .iOS(.v15),
+        .iOS(.v10),
         .macOS(.v10_12)
     ],
     products: [
@@ -19,7 +19,7 @@ let package = Package(
             targets: ["MagicExt-OIDC"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/magiclabs/magic-ios.git", from:"7.0.0"),
+        .package(url: "https://github.com/magiclabs/magic-ios.git", "4.0.0"..<"8.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
