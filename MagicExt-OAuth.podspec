@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MagicExt-OAuth'
-  s.version          = '1.1.2'
+  s.version          = '1.1.3'
   s.summary          = 'Magic IOS Extension - OAuth'
 
   s.description      = <<-DESC
@@ -16,7 +16,7 @@ TODO: Add long description of the pod here.
   s.author           = { 'Jerry Liu' => 'jerry@magic.link' }
   s.source           = { :git => 'https://github.com/magicLabs/magic-ios-ext.git', :tag => s.version.to_s }
   s.swift_version = '5.0'
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
 #   s.osx.deployment_target  = '10.12'
 
   s.source_files = 'Sources/MagicExt-OAuth/**/*'
