@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "MagicExtensions",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v13),
         .macOS(.v10_12)
     ],
     products: [
@@ -17,6 +17,9 @@ let package = Package(
         .library(
             name: "MagicExt-OIDC",
             targets: ["MagicExt-OIDC"]),
+        .library(
+            name: "MagicExt-GDKMS",
+            targets: ["MagicExt-GDKMS"]),
     ],
     dependencies: [
         .package(url: "https://github.com/magiclabs/magic-ios.git", from:"4.0.0"),
@@ -34,11 +37,16 @@ let package = Package(
             dependencies: [
                 .product(name: "MagicSDK", package: "magic-ios"),
             ]),
+        .target(
+            name: "MagicExt-GDKMS",
+            dependencies: [
+                .product(name: "MagicSDK", package: "magic-ios"),
+            ]),
         .testTarget(
             name: "MagicExt-OAuthTests",
             dependencies: ["MagicExt-OAuth"]),
         .testTarget(
             name: "MagicExt-OIDCTests",
-            dependencies: ["MagicExt-OIDC"]),
+            dependencies: ["MagicExt-OIDC"])
     ]
 )
