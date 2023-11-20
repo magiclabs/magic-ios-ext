@@ -21,13 +21,13 @@ public class OAuthExtension: BaseModule {
         case unableToStartPopup
     }
 
-    public func loginWithPopup (_ configuration: OAuthConfiguration) -> Promise<OAuthResponse> {
+    public func loginWithRedirect (_ configuration: OAuthConfiguration) -> Promise<OAuthResponse> {
         return Promise { resolver in
-            loginWithPopup(configuration, response: promiseResolver(resolver))
+            loginWithRedirect(configuration, response: promiseResolver(resolver))
         }
     }
 
-    public func loginWithPopup (_ configuration: OAuthConfiguration, response: @escaping Web3ResponseCompletion<OAuthResponse>) {
+    public func loginWithRedirect (_ configuration: OAuthConfiguration, response: @escaping Web3ResponseCompletion<OAuthResponse>) {
         let oauthChallenge = OAuthChallenge()
 
         // Construct OAuth URL
