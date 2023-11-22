@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MagicExt-OIDC'
-  s.version          = '2.0.0'
+  s.version          = '2.0.1'
   s.summary          = 'Magic IOS Extension - OIDC'
 
   s.description      = <<-DESC
@@ -21,7 +21,7 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Sources/MagicExt-OIDC/**/*'
 
-  s.dependency 'MagicSDK', '~> 9.0'
+  s.dependency 'MagicSDK', '~> 10.0'
 
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 end
