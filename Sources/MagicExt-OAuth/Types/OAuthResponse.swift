@@ -23,5 +23,5 @@ public struct OauthPartialResult: Codable {
 }
 public struct MagicPartialResult: Codable {
     public let idToken: String;
-    public let userMetadata: UserMetadata;
+    public let userInfo: UserInfo;
 }
