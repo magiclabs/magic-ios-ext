@@ -1,4 +1,13 @@
-**We have decided to temporarily archive this repository and place it into maintenance mode. This decision allows us to focus our efforts and resources on advancing our core product line. During this period, active development and the addition of new features will be paused. We value the contributions of the community and appreciate your understanding as we prioritize our main projects. We look forward to resuming development in the future and will keep you updated on any changes.**
+# MagicExt
+
+Official extensions for the [Magic iOS SDK](https://github.com/magiclabs/magic-ios), shipped as Swift Package Manager products:
+
+- `MagicExt-Solana`
+- `MagicExt-Bitcoin`
+- `MagicExt-OAuth`
+- `MagicExt-OIDC`
+
+Requires iOS 13 or later. CocoaPods is not supported.
 
 ## Solana and Bitcoin
 
@@ -119,45 +128,14 @@ The signed result comes back through Magic's relayer. Decode `rawTransaction` or
 
 ---
 
-# MagicExt-OAuth
-[![CI Status](https://img.shields.io/travis/Ethella/MagicExt-OAuth.svg?style=flat)](https://travis-ci.org/Ethella/MagicExt-OAuth)
-[![Version](https://img.shields.io/cocoapods/v/MagicExt-OAuth.svg?style=flat)](https://cocoapods.org/pods/MagicExt-OAuth)
-[![License](https://img.shields.io/cocoapods/l/MagicExt-OAuth.svg?style=flat)](https://cocoapods.org/pods/MagicExt-OAuth)
-[![Platform](https://img.shields.io/cocoapods/p/MagicExt-OAuth.svg?style=flat)](https://cocoapods.org/pods/MagicExt-OAuth)
+## Develop locally
 
-Cocoapods
----
-## Set up the local development env
-1. To start the demo app with local development SDK, download following projects
-```bash
-# demo app
-$ git clone https://github.com/magiclabs/magic-ios-demo
-# ios SDK
-$ git clone https://github.com/magiclabs/magic-ios
-$ git clone https://github.com/magiclabs/magic-ios-ext
-```
-
-2. To enable the demo use the local development SDK. Navigate to `magic-ios-demo/Podfile` and edit the following lines.
-   This will make pod file install local dependencies instead of the ones distributed.
-
-```ruby 
-# Distributed Library on Cocoapods
-# pod 'MagicSDK', '~> 3.0'
-# pod 'MagicExt-OAuth', '~> 1.0'
-    
-#   Local development library
-pod 'MagicSDK', :path => '../magic-ios/MagicSDK.podspec'
-pod 'MagicExt-OAuth', :path => '../magic-ios-ext/MagicExt-OAuth.podspec'
-```
+Clone the SDK, this repo and the demo app side by side:
 
 ```bash
-$ cd /YOUR/PATH/TO/magic-ios-demo
-
-# Install dependencies
-$ pod install
+git clone https://github.com/magiclabs/magic-ios
+git clone https://github.com/magiclabs/magic-ios-ext
+git clone https://github.com/magiclabs/magic-ios-demo
 ```
 
-3. Open `/YOUR/PATH/TO/magic-ios-demo/magic-ios-demo.xcworkspace` with XCode and try it out!
-
----
-
+Open `magic-ios-demo/magic-ios-spm-demo.xcodeproj`. It uses the local `magic-ios` and `magic-ios-ext` folders, so your changes show up in the demo. If Xcode says a package product is missing, run File > Packages > Resolve Package Versions.
