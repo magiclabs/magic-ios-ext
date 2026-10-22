@@ -17,6 +17,12 @@ let package = Package(
         .library(
             name: "MagicExt-OIDC",
             targets: ["MagicExt-OIDC"]),
+        .library(
+            name: "MagicExt-Solana",
+            targets: ["MagicExt-Solana"]),
+        .library(
+            name: "MagicExt-Bitcoin",
+            targets: ["MagicExt-Bitcoin"]),
     ],
     dependencies: [
         .package(url: "https://github.com/magiclabs/magic-ios.git", from: "10.1.1")
@@ -34,11 +40,27 @@ let package = Package(
             dependencies: [
                 .product(name: "MagicSDK", package: "magic-ios"),
             ]),
+        .target(
+            name: "MagicExt-Solana",
+            dependencies: [
+                .product(name: "MagicSDK", package: "magic-ios"),
+            ]),
+        .target(
+            name: "MagicExt-Bitcoin",
+            dependencies: [
+                .product(name: "MagicSDK", package: "magic-ios"),
+            ]),
         .testTarget(
             name: "MagicExt-OAuthTests",
             dependencies: ["MagicExt-OAuth"]),
         .testTarget(
             name: "MagicExt-OIDCTests",
             dependencies: ["MagicExt-OIDC"]),
+        .testTarget(
+            name: "MagicExt-SolanaTests",
+            dependencies: ["MagicExt-Solana"]),
+        .testTarget(
+            name: "MagicExt-BitcoinTests",
+            dependencies: ["MagicExt-Bitcoin"]),
     ]
 )
