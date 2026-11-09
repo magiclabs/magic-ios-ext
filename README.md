@@ -5,13 +5,12 @@ Official extensions for the [Magic iOS SDK](https://github.com/magiclabs/magic-i
 - `MagicExt-Solana`
 - `MagicExt-Bitcoin`
 - `MagicExt-OAuth`
-- `MagicExt-OIDC`
 
 Requires iOS 13 or later. CocoaPods is not supported.
 
 ## Solana and Bitcoin
 
-Solana and Bitcoin work like the `@magic-ext/solana` and `@magic-ext/bitcoin` packages in magic-js. They need a version of [magic-ios](https://github.com/magiclabs/magic-ios) that has `Magic(apiKey:extensions:)`.
+Solana and Bitcoin work like the `@magic-ext/solana` and `@magic-ext/bitcoin` packages in magic-js. They need [magic-ios](https://github.com/magiclabs/magic-ios) 10.4.0 or later, which has `Magic(apiKey:extensions:)`.
 
 Add the package with Swift Package Manager, then add the products you need to your target: `MagicExt-Solana`, `MagicExt-Bitcoin`, or both.
 
