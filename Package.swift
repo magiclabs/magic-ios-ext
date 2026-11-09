@@ -15,11 +15,14 @@ let package = Package(
             name: "MagicExt-OAuth",
             targets: ["MagicExt-OAuth"]),
         .library(
-            name: "MagicExt-OIDC",
-            targets: ["MagicExt-OIDC"]),
+            name: "MagicExt-Solana",
+            targets: ["MagicExt-Solana"]),
+        .library(
+            name: "MagicExt-Bitcoin",
+            targets: ["MagicExt-Bitcoin"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/magiclabs/magic-ios.git", from: "10.1.1")
+        .package(url: "https://github.com/magiclabs/magic-ios.git", from: "10.4.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -30,7 +33,12 @@ let package = Package(
                 .product(name: "MagicSDK", package: "magic-ios"),
             ]),
         .target(
-            name: "MagicExt-OIDC",
+            name: "MagicExt-Solana",
+            dependencies: [
+                .product(name: "MagicSDK", package: "magic-ios"),
+            ]),
+        .target(
+            name: "MagicExt-Bitcoin",
             dependencies: [
                 .product(name: "MagicSDK", package: "magic-ios"),
             ]),
@@ -38,7 +46,10 @@ let package = Package(
             name: "MagicExt-OAuthTests",
             dependencies: ["MagicExt-OAuth"]),
         .testTarget(
-            name: "MagicExt-OIDCTests",
-            dependencies: ["MagicExt-OIDC"]),
+            name: "MagicExt-SolanaTests",
+            dependencies: ["MagicExt-Solana"]),
+        .testTarget(
+            name: "MagicExt-BitcoinTests",
+            dependencies: ["MagicExt-Bitcoin"]),
     ]
 )
