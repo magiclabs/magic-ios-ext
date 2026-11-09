@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  pull_request: {}
+  push:
+    branches: [ main ]
+
+permissions: {}
+
+jobs:
+  build:
+    name: Build (iOS Simulator)
+    runs-on: macos-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Build all products for the iOS Simulator
+        run: xcodebuild build -scheme MagicExtensions-Package -destination 'generic/platform=iOS Simulator'
